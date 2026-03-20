@@ -66,413 +66,125 @@ document.querySelectorAll('.section').forEach(section => {
     observer.observe(section);
 });
 
-// Style Quiz
-const quizQuestions = [
-    {
-        id: 'q1',
-        question: 'What design aesthetic appeals to you most?',
-        options: [
-            { value: 'clean', label: 'Clean & Minimal', icon: 'fas fa-square' },
-            { value: 'ornate', label: 'Ornate & Detailed', icon: 'fas fa-crown' },
-            { value: 'mixed', label: 'Mix of Styles', icon: 'fas fa-palette' },
-            { value: 'natural', label: 'Natural & Organic', icon: 'fas fa-leaf' }
-        ]
-    },
-    {
-        id: 'q2',
-        question: 'What color palette do you prefer?',
-        options: [
-            { value: 'neutral', label: 'Neutral & Calm', icon: 'fas fa-circle' },
-            { value: 'vibrant', label: 'Bold & Vibrant', icon: 'fas fa-fire' },
-            { value: 'earthy', label: 'Earthy Tones', icon: 'fas fa-mountain' },
-            { value: 'monochrome', label: 'Black & White', icon: 'fas fa-adjust' }
-        ]
-    },
-    {
-        id: 'q3',
-        question: 'How do you want your space to feel?',
-        options: [
-            { value: 'functional', label: 'Functional & Practical', icon: 'fas fa-tools' },
-            { value: 'cozy', label: 'Cozy & Warm', icon: 'fas fa-home' },
-            { value: 'luxurious', label: 'Luxurious & Elegant', icon: 'fas fa-gem' },
-            { value: 'creative', label: 'Creative & Inspiring', icon: 'fas fa-lightbulb' }
-        ]
-    },
-    {
-        id: 'q4',
-        question: 'What materials do you gravitate towards?',
-        options: [
-            { value: 'wood', label: 'Natural Wood', icon: 'fas fa-tree' },
-            { value: 'metal', label: 'Metal & Glass', icon: 'fas fa-cog' },
-            { value: 'fabric', label: 'Soft Fabrics', icon: 'fas fa-tshirt' },
-            { value: 'stone', label: 'Stone & Concrete', icon: 'fas fa-cubes' }
-        ]
-    },
-    {
-        id: 'q5',
-        question: 'How important is sustainability?',
-        options: [
-            { value: 'very', label: 'Very Important', icon: 'fas fa-recycle' },
-            { value: 'somewhat', label: 'Somewhat Important', icon: 'fas fa-leaf' },
-            { value: 'neutral', label: 'Neutral', icon: 'fas fa-balance-scale' },
-            { value: 'notmuch', label: 'Not a Priority', icon: 'fas fa-minus' }
-        ]
-    }
-];
-
-let currentQuestion = 0;
-let quizAnswers = {};
-
-function startQuiz() {
-    document.getElementById('quizStart').style.display = 'none';
-    document.getElementById('quizQuestions').style.display = 'block';
-    currentQuestion = 0;
-    quizAnswers = {};
-    renderQuestion();
-}
-
-function renderQuestion() {
-    const container = document.getElementById('quizQuestions');
-    const question = quizQuestions[currentQuestion];
-    
-    const progress = ((currentQuestion + 1) / quizQuestions.length) * 100;
-    
-    container.innerHTML = `
-        <div class="quiz-progress">
-            <div class="quiz-progress-bar" style="width: ${progress}%"></div>
-        </div>
-        <div class="quiz-question">
-            <h4>Question ${currentQuestion + 1} of ${quizQuestions.length}</h4>
-            <h3>${question.question}</h3>
-            <div class="quiz-options">
-                ${question.options.map(option => `
-                    <div class="quiz-option" onclick="selectQuizOption('${question.id}', '${option.value}')">
-                        <i class="${option.icon}"></i>
-                        <div>${option.label}</div>
-                    </div>
-                `).join('')}
-            </div>
-        </div>
-        <div style="display: flex; gap: 16px; margin-top: 32px;">
-            ${currentQuestion > 0 ? `
-                <button class="btn btn-outline" onclick="previousQuestion()">
-                    <i class="fas fa-arrow-left"></i> Previous
-                </button>
-            ` : ''}
-        </div>
-    `;
-}
-
-function selectQuizOption(questionId, value) {
-    quizAnswers[questionId] = value;
-    
-    // Visual feedback
-    document.querySelectorAll('.quiz-option').forEach(opt => {
-        opt.classList.remove('selected');
-    });
-    event.target.closest('.quiz-option').classList.add('selected');
-    
-    // Auto-advance after selection
-    setTimeout(() => {
-        if (currentQuestion < quizQuestions.length - 1) {
-            nextQuestion();
-        } else {
-            submitQuiz();
-        }
-    }, 500);
-}
-
-function nextQuestion() {
-    currentQuestion++;
-    renderQuestion();
-}
-
-function previousQuestion() {
-    currentQuestion--;
-    renderQuestion();
-}
-
-async function submitQuiz() {
-    try {
-        const response = await fetch('/api/style-quiz', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ answers: quizAnswers })
-        });
-        
-        const data = await response.json();
-        
-        if (data.success) {
-            displayQuizResults(data);
-        }
-    } catch (error) {
-        console.error('Quiz error:', error);
-        showModal('Error', 'Failed to process quiz. Please try again.');
-    }
-}
-
-function displayQuizResults(data) {
-    const container = document.getElementById('quizQuestions');
-    const results = document.getElementById('quizResults');
-    const recommendations = data.recommendations;
-    
-    container.style.display = 'none';
-    results.style.display = 'block';
-    
-    results.innerHTML = `
-        <div class="modal-icon success">
-            <i class="fas fa-check-circle"></i>
-        </div>
-        <h2 class="result-style">${data.primary_style}</h2>
-        <p class="result-description">${recommendations.description}</p>
-        
-        <div class="result-recommendations">
-            <div class="result-section">
-                <h4><i class="fas fa-palette"></i> Recommended Colors</h4>
-                <div class="result-items">
-                    ${recommendations.colors.map(color => `
-                        <span class="result-item">${color}</span>
-                    `).join('')}
-                </div>
-            </div>
-            
-            <div class="result-section">
-                <h4><i class="fas fa-cube"></i> Materials</h4>
-                <div class="result-items">
-                    ${recommendations.materials.map(material => `
-                        <span class="result-item">${material}</span>
-                    `).join('')}
-                </div>
-            </div>
-            
-            <div class="result-section">
-                <h4><i class="fas fa-couch"></i> Furniture Styles</h4>
-                <div class="result-items">
-                    ${recommendations.furniture.map(item => `
-                        <span class="result-item">${item}</span>
-                    `).join('')}
-                </div>
-            </div>
-        </div>
-        
-        <div style="display: flex; gap: 16px; margin-top: 40px;">
-            <button class="btn btn-large btn-primary" onclick="scrollToSection('site-visit')">
-                <i class="fas fa-calendar-check"></i> Book Free Consultation
-            </button>
-            <button class="btn btn-large btn-outline" onclick="resetQuiz()">
-                <i class="fas fa-redo"></i> Retake Quiz
-            </button>
-        </div>
-    `;
-}
-
-function resetQuiz() {
-    document.getElementById('quizResults').style.display = 'none';
-    document.getElementById('quizStart').style.display = 'block';
-    currentQuestion = 0;
-    quizAnswers = {};
-}
-
-// Cost Calculator
-document.getElementById('estimateForm')?.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    
-    const formData = {
-        property_type: document.getElementById('propertyType').value,
-        sqft: document.getElementById('sqft').value,
-        quality: document.querySelector('input[name="quality"]:checked').value,
-        rooms: Array.from(document.querySelectorAll('input[name="rooms"]:checked'))
-            .map(cb => cb.value)
-    };
-    
-    if (formData.rooms.length === 0) {
-        showModal('Error', 'Please select at least one room to design.');
-        return;
-    }
-    
-    try {
-        const response = await fetch('/api/estimate', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(formData)
-        });
-        
-        const data = await response.json();
-        
-        if (data.success) {
-            displayEstimate(data.estimate);
-        }
-    } catch (error) {
-        console.error('Estimate error:', error);
-        showModal('Error', 'Failed to calculate estimate. Please try again.');
-    }
-});
-
-function displayEstimate(estimate) {
-    const container = document.getElementById('calculatorResult');
-    
-    container.innerHTML = `
-        <div class="estimate-header">
-            <h3>Your Estimated Cost</h3>
-            <div class="estimate-total">₹${formatCurrency(estimate.total_cost)}</div>
-            <p class="estimate-subtitle">₹${formatCurrency(estimate.cost_per_sqft)}/sq.ft</p>
-        </div>
-        
-        <div class="estimate-info">
-            <div class="info-box">
-                <strong>${estimate.timeline_days} Days</strong>
-                <span>Project Timeline</span>
-            </div>
-            <div class="info-box">
-                <strong style="color: ${getEcoColor(estimate.eco_score)}">${estimate.eco_score}/100</strong>
-                <span>Eco-Score</span>
-            </div>
-        </div>
-        
-        <div class="estimate-details">
-            <h4 style="margin-bottom: 16px;">Cost Breakdown</h4>
-            <div class="estimate-row">
-                <span>Modular Work</span>
-                <strong>₹${formatCurrency(estimate.breakdown.modular_work)}</strong>
-            </div>
-            <div class="estimate-row">
-                <span>False Ceiling</span>
-                <strong>₹${formatCurrency(estimate.breakdown.false_ceiling)}</strong>
-            </div>
-            <div class="estimate-row">
-                <span>Electrical Work</span>
-                <strong>₹${formatCurrency(estimate.breakdown.electrical)}</strong>
-            </div>
-            <div class="estimate-row">
-                <span>Painting</span>
-                <strong>₹${formatCurrency(estimate.breakdown.painting)}</strong>
-            </div>
-            <div class="estimate-row">
-                <span>Flooring</span>
-                <strong>₹${formatCurrency(estimate.breakdown.flooring)}</strong>
-            </div>
-            <div class="estimate-row">
-                <span>Miscellaneous</span>
-                <strong>₹${formatCurrency(estimate.breakdown.miscellaneous)}</strong>
-            </div>
-        </div>
-        
-        <button class="btn btn-large btn-primary full-width" onclick="scrollToSection('site-visit')">
-            <i class="fas fa-calendar-check"></i> Schedule Free Site Visit
-        </button>
-        
-        <p style="text-align: center; font-size: 14px; color: var(--text-medium); margin-top: 16px;">
-            *This is an approximate estimate. Final quote will be provided after site visit.
-        </p>
-    `;
-    
-    container.style.display = 'block';
-    container.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-}
-
-function formatCurrency(amount) {
-    return new Intl.NumberFormat('en-IN').format(Math.round(amount));
-}
-
-function getEcoColor(score) {
-    if (score >= 80) return 'var(--secondary-color)';
-    if (score >= 60) return 'var(--accent-color)';
-    return 'var(--error-color)';
-}
-
-// Site Visit Form
-document.getElementById('siteVisitForm')?.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    
-    const formData = {
-        name: document.getElementById('visitName').value,
-        email: document.getElementById('visitEmail').value,
-        phone: document.getElementById('visitPhone').value,
-        property_type: document.getElementById('visitPropertyType').value,
-        sqft: document.getElementById('visitSqft').value,
-        address: document.getElementById('visitAddress').value,
-        city: document.getElementById('visitCity').value,
-        pincode: document.getElementById('visitPincode').value,
-        preferred_date: document.getElementById('visitDate').value,
-        preferred_time: document.getElementById('visitTime').value
-    };
-    
-    try {
-        const response = await fetch('/api/site-visit', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(formData)
-        });
-        
-        const data = await response.json();
-        
-        if (data.success) {
-            showModal(
-                'Site Visit Scheduled! 🎉',
-                data.message_detail || data.message
-            );
-            e.target.reset();
-        }
-    } catch (error) {
-        console.error('Site visit error:', error);
-        showModal('Error', 'Failed to schedule site visit. Please try again or call us.');
-    }
-});
-
 // Contact Form
-document.getElementById('contactForm')?.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    
-    const formData = {
-        name: document.getElementById('contactName').value,
-        email: document.getElementById('contactEmail').value,
-        phone: document.getElementById('contactPhone').value,
-        message: document.getElementById('contactMessage').value
-    };
-    
-    try {
-        const response = await fetch('/api/contact', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(formData)
-        });
-        
-        const data = await response.json();
-        
-        if (data.success) {
-            showModal('Message Sent!', data.message);
-            e.target.reset();
-        }
-    } catch (error) {
-        console.error('Contact error:', error);
-        showModal('Error', 'Failed to send message. Please try again.');
+document.addEventListener("DOMContentLoaded", () => {
+  const navToggle = document.getElementById("navToggle");
+  const mainNav = document.getElementById("mainNav");
+
+  if (navToggle && mainNav) {
+    navToggle.addEventListener("click", () => {
+      mainNav.classList.toggle("open");
+    });
+  }
+
+  const contactForm = document.getElementById("contactForm");
+  if (!contactForm) return;
+
+  const nameInput = document.getElementById("name");
+  const mobileInput = document.getElementById("mobile_number");
+  const messageInput = document.getElementById("message");
+  const nameError = document.getElementById("nameError");
+  const mobileError = document.getElementById("mobileError");
+  const messageError = document.getElementById("messageError");
+  const formMessage = document.getElementById("formMessage");
+
+  function resetMessages() {
+    if (nameError) nameError.textContent = "";
+    if (mobileError) mobileError.textContent = "";
+    if (messageError) messageError.textContent = "";
+    if (formMessage) {
+      formMessage.textContent = "";
+      formMessage.classList.remove("success", "error");
     }
+  }
+
+  function validateForm() {
+    let valid = true;
+    const name = nameInput.value.trim();
+    const mobile = mobileInput.value.trim();
+    const message = messageInput.value.trim();
+
+    resetMessages();
+
+    if (!name) {
+      nameError.textContent = "Name is required.";
+      valid = false;
+    }
+
+    if (!mobile) {
+      mobileError.textContent = "Mobile number is required.";
+      valid = false;
+    } else if (!/^\d{10}$/.test(mobile)) {
+      mobileError.textContent = "Mobile number must be exactly 10 digits.";
+      valid = false;
+    }
+
+    if (!message) {
+      messageError.textContent = "Message is required.";
+      valid = false;
+    }
+
+    return valid;
+  }
+
+  contactForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    if (!validateForm()) {
+      return;
+    }
+
+    const payload = {
+      name: nameInput.value.trim(),
+      mobile_number: mobileInput.value.trim(),
+      message: messageInput.value.trim(),
+    };
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await response.json().catch(() => ({}));
+
+      if (response.ok && data.success) {
+        formMessage.textContent =
+          data.message || "Thank you! We will contact you soon.";
+        formMessage.classList.add("success");
+        nameInput.value = "";
+        mobileInput.value = "";
+        messageInput.value = "";
+      } else {
+        if (data.errors) {
+          if (data.errors.name && nameError) {
+            nameError.textContent = data.errors.name;
+          }
+          if (data.errors.mobile_number && mobileError) {
+            mobileError.textContent = data.errors.mobile_number;
+          }
+          if (data.errors.message && messageError) {
+            messageError.textContent = data.errors.message;
+          }
+        }
+
+        formMessage.textContent =
+          data.message ||
+          "There was a problem submitting the form. Please try again.";
+        formMessage.classList.add("error");
+      }
+    } catch (error) {
+      formMessage.textContent =
+        "Network error. Please check your connection and try again.";
+      formMessage.classList.add("error");
+    }
+  });
 });
 
-// Newsletter Form
-document.getElementById('newsletterForm')?.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    
-    const email = document.getElementById('newsletterEmail').value;
-    
-    try {
-        const response = await fetch('/api/newsletter', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email })
-        });
-        
-        const data = await response.json();
-        
-        if (data.success) {
-            showModal('Subscribed!', data.message);
-            e.target.reset();
-        }
-    } catch (error) {
-        console.error('Newsletter error:', error);
-        showModal('Error', 'Failed to subscribe. Please try again.');
-    }
-});
+
 
 // Modal Functions
 function showModal(title, message) {
@@ -493,13 +205,6 @@ document.getElementById('successModal')?.addEventListener('click', (e) => {
     }
 });
 
-// Set minimum date for site visit
-const dateInput = document.getElementById('visitDate');
-if (dateInput) {
-    const today = new Date();
-    today.setDate(today.getDate() + 1); // Tomorrow
-    dateInput.min = today.toISOString().split('T')[0];
-}
 
 // Add active state to nav links on scroll
 window.addEventListener('scroll', () => {

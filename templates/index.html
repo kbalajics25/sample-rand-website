@@ -364,17 +364,22 @@
                     <form id="contactForm">
                         <h3>Send us a message</h3>
                         <div class="form-group">
-                            <input type="text" id="contactName" required placeholder="Your Name">
+                            <input type="text" id="name" required placeholder="Your Name">
+                            <p id="nameError" class="error"></p>
                         </div>
                         <div class="form-group">
-                                <input type="tel" id="contactPhone" required placeholder="Phone">
-                        </div>
+                            <input type="tel" id="mobile_number" required placeholder="Phone">
+                            <p id="mobileError" class="error"></p>
+</div>
                         <div class="form-group">
-                            <textarea id="contactMessage" rows="4" placeholder="Tell us about your project..."></textarea>
+                            <textarea id="message" rows="4" placeholder="Tell us about your project..."></textarea>
+                            <p id="messageError" class="error"></p>
                         </div>
                         <button type="submit" class="btn btn-primary full-width">
                             <i class="fas fa-paper-plane"></i> Send Message
                         </button>
+
+                        <p id="formMessage" class="form-message"></p>
                     </form>
                 </div>
             </div>
