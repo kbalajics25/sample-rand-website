@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DesignNest Studio - Sustainable Interior Design with Free Site Visit & 2D Layout</title>
+    <meta name="description" content="Transform your space with DesignNest Studio. Get free site visit, instant 2D layout, and AI-powered design recommendations. Eco-friendly interior design across India.">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                        <img src="/static/images/Company Logo.jpg" alt="Logo" style="height:40px;">
+                        <span>IMPRINTS The Design Studio</span>
+                </div>
+                <div class="nav-links" id="navLinks">
+                    <a href="#home" class="nav-link active">Home</a>
+                    <a href="#how-it-works" class="nav-link">How It Works</a>
+                    <a href="#portfolio" class="nav-link">Portfolio/Services</a>
+                    <a href="#contact" class="nav-link">Contact</a>
+                </div>
+                <button class="btn btn-primary desktop-cta" onclick="scrollToSection('site-visit')">
+                    <a href="https://wa.me/918088993323?text=Hello%20I%20want%20more%20details" target="_blank">Chat With Us</a>
+                </button>
+            
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-background"></div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <span class="badge">
+                        <i class="fas fa-leaf"></i> Eco-Friendly Design Leaders
+                    </span>
+                    <h1 class="hero-title">
+                        Your Space, Your Story,<br>
+                        <span class="gradient-text">Our Innovation</span>
+                    </h1>
+                    <p class="hero-description">
+                        Experience the future of interior design with AI-powered recommendations, 
+                        sustainability scoring, and transparent pricing. Get started with a 
+                        <strong>FREE site visit</strong> and <strong>complimentary 2D layout</strong>.
+                    </p>
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <div class="stat-number">5000+</div>
+                            <div class="stat-label">Homes Transformed</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">98%</div>
+                            <div class="stat-label">Client Satisfaction</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">45</div>
+                            <div class="stat-label">Days Guarantee</div>
+                        </div>
+                    </div>
+                    
+                    <div class="trust-badges">
+                        <div class="trust-badge">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>10-Year Warranty</span>
+                        </div>
+                        <div class="trust-badge">
+                            <i class="fas fa-award"></i>
+                            <span>ISO Certified</span>
+                        </div>
+                        <div class="trust-badge">
+                            <i class="fas fa-leaf"></i>
+                            <span>Carbon Neutral</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="floating-card card-1">
+                        <i class="fas fa-paint-roller"></i>
+                        <div>
+                            <strong>AI-Powered</strong>
+                            <p>Design Matching</p>
+                        </div>
+                    </div>
+                    <div class="floating-card card-2">
+                        <i class="fas fa-leaf"></i>
+                        <div>
+                            <strong>Eco-Score</strong>
+                            <p>Every Design</p>
+                        </div>
+                    </div>
+                    <div class="floating-card card-3">
+                        <i class="fas fa-rupee-sign"></i>
+                        <div>
+                            <strong>Transparent</strong>
+                            <p>Pricing</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="section how-it-works" id="how-it-works">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">Our Process</span>
+                <h2 class="section-title">Simple 4-Step Journey</h2>
+                <p class="section-description">From first contact to move-in day, we make interior design effortless</p>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>1. Free Site Visit</h3>
+                        <p>Book a complimentary site visit. Our expert measures your space and discusses your vision.</p>
+                        <ul class="feature-list">
+                            <li><i class="fas fa-check"></i> Professional space measurement</li>
+                            <li><i class="fas fa-check"></i> FREE 2D layout plan</li>
+                            <li><i class="fas fa-check"></i> Instant cost estimation</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>2. AI Design Consultation</h3>
+                        <p>Take our style quiz. Get AI-powered design recommendations matched to your personality.</p>
+                        <ul class="feature-list">
+                            <li><i class="fas fa-check"></i> Personalized style matching</li>
+                            <li><i class="fas fa-check"></i> 3D visualization renders</li>
+                            <li><i class="fas fa-check"></i> Material selection guide</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-icon">
+                        <i class="fas fa-hammer"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>3. Smart Execution</h3>
+                        <p>Factory-made precision components. Live progress tracking with AR preview.</p>
+                        <ul class="feature-list">
+                            <li><i class="fas fa-check"></i> Quality-checked at factory</li>
+                            <li><i class="fas fa-check"></i> Real-time progress updates</li>
+                            <li><i class="fas fa-check"></i> Zero-dust installation</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-icon">
+                        <i class="fas fa-key"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>4. Move-In Ready</h3>
+                        <p>Final walkthrough and handover. 10-year warranty and lifetime support.</p>
+                        <ul class="feature-list">
+                            <li><i class="fas fa-check"></i> 51-point quality checklist</li>
+                            <li><i class="fas fa-check"></i> 10-year warranty</li>
+                            <li><i class="fas fa-check"></i> 24/7 customer support</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section class="section portfolio" id="portfolio">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">Our Work</span>
+                <h2 class="section-title">Transformations That Inspire</h2>
+                <p class="section-description">Real homes, real people, real stories</p>
+            </div>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <div class="portfolio-image" style = "background: url('https://st.hzcdn.com/simgs/97910d6b0407c3d1_14-0485/_.jpg') center/cover no-repeat;">
+                        <div class="portfolio-overlay">
+                            <span class="portfolio-category">Modern Living</span>
+                            <h3>Mumbai Penthouse</h3>
+                            <div class="portfolio-details">
+                                <span><i class="fas fa-ruler"></i> 2100 sq.ft</span>
+                                <span><i class="fas fa-clock"></i> 48 days</span>
+                                <span><i class="fas fa-leaf"></i> Eco: 92</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-image" style = "background: url('https://server.ekostay.com/public/property_images/67dd568de74de_1.webp') center/cover no-repeat;">
+                        <div class="portfolio-overlay">
+                            <span class="portfolio-category">Scandinavian</span>
+                            <h3>Bangalore Villa</h3>
+                            <div class="portfolio-details">
+                                <span><i class="fas fa-ruler"></i> 3500 sq.ft</span>
+                                <span><i class="fas fa-clock"></i> 65 days</span>
+                                <span><i class="fas fa-leaf"></i> Eco: 88</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-image" style = "background: url('https://st.hzcdn.com/simgs/97910d6b0407c3d1_14-0485/_.jpg') center/cover no-repeat;">
+                        <div class="portfolio-overlay">
+                            <span class="portfolio-category">Minimalist</span>
+                            <h3>Pune Apartment</h3>
+                            <div class="portfolio-details">
+                                <span><i class="fas fa-ruler"></i> 1450 sq.ft</span>
+                                <span><i class="fas fa-clock"></i> 42 days</span>
+                                <span><i class="fas fa-leaf"></i> Eco: 95</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-image" style = "background: url('https://st.hzcdn.com/simgs/97910d6b0407c3d1_14-0485/_.jpg') center/cover no-repeat;">
+                        <div class="portfolio-overlay">
+                            <span class="portfolio-category">Traditional</span>
+                            <h3>Delhi Residence</h3>
+                            <div class="portfolio-details">
+                                <span><i class="fas fa-ruler"></i> 2800 sq.ft</span>
+                                <span><i class="fas fa-clock"></i> 55 days</span>
+                                <span><i class="fas fa-leaf"></i> Eco: 85</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-image" style = "background: url('https://st.hzcdn.com/simgs/97910d6b0407c3d1_14-0485/_.jpg') center/cover no-repeat;">
+                        <div class="portfolio-overlay">
+                            <span class="portfolio-category">Scandinavian</span>
+                            <h3>Bangalore Villa</h3>
+                            <div class="portfolio-details">
+                                <span><i class="fas fa-ruler"></i> 3500 sq.ft</span>
+                                <span><i class="fas fa-clock"></i> 65 days</span>
+                                <span><i class="fas fa-leaf"></i> Eco: 88</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-image" style = "background: url('https://st.hzcdn.com/simgs/97910d6b0407c3d1_14-0485/_.jpg') center/cover no-repeat;">
+                        <div class="portfolio-overlay">
+                            <span class="portfolio-category">Minimalist</span>
+                            <h3>Pune Apartment</h3>
+                            <div class="portfolio-details">
+                                <span><i class="fas fa-ruler"></i> 1450 sq.ft</span>
+                                <span><i class="fas fa-clock"></i> 42 days</span>
+                                <span><i class="fas fa-leaf"></i> Eco: 95</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="section testimonials">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">Client Stories</span>
+                <h2 class="section-title">What Our Clients Say</h2>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p><i>"The free site visit was incredibly detailed. They delivered the 2D layout in 24 hours and the estimate was spot-on. The eco-score feature helped us make sustainable choices!"</i></p>
+                    <div class="testimonial-author">
+                        <strong>Priya Sharma</strong>
+                        <span>Mumbai, 3 BHK</span>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p><i>"The style quiz was fun and accurate! They matched my personality perfectly with a Scandinavian design. The AI recommendations saved us hours of Pinterest scrolling."</i></p>
+                    <div class="testimonial-author">
+                        <strong>Rahul Verma</strong>
+                        <span>Bangalore, Villa</span>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p><i>"Transparent pricing from day one. No hidden charges, no surprises. They completed our 2 BHK in exactly 45 days as promised. Best decision we made!"</i></p>
+                    <div class="testimonial-author">
+                        <strong>Anjali Mehta</strong>
+                        <span>Pune, 2 BHK</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section contact" id="contact">
+        <div class="container">
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h2>Get In Touch</h2>
+                    <p>Have questions? Our design experts are here to help you create your dream space.</p>
+                    <div class="contact-details">
+                        <div class="contact-detail">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <strong>Call Us</strong>
+                                <p>+91 98765 43210</p>
+                            </div>
+                        </div>
+                        <div class="contact-detail">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <strong>Email Us</strong>
+                                <p>hello@designnest.studio</p>
+                            </div>
+                        </div>
+                        <div class="contact-detail">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <strong>Visit Us</strong>
+                                <p>Experience Centers in Mumbai, Delhi, Bangalore, Pune, Hyderabad</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/kbalajics25?igsh=Nmo3ZXZod3ZnYWU4" class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.facebook.com/share/1Bk3jSfwGw/" class="social-link" target="_blank"><i class="fab fa-facebook"></i></a>
+                        <a href="https://pin.it/3GgNRkgcU" class="social-link" target="_blank"><i class="fab fa-pinterest"></i></a>
+                        <a href="https://www.linkedin.com/in/balaji-k-731528350/" class="social-link" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <h3>Send us a message</h3>
+                        <div class="form-group">
+                            <input type="text" id="contactName" required placeholder="Your Name">
+                        </div>
+                        <div class="form-group">
+                                <input type="tel" id="contactPhone" required placeholder="Phone">
+                        </div>
+                        <div class="form-group">
+                            <textarea id="contactMessage" rows="4" placeholder="Tell us about your project..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary full-width">
+                            <i class="fas fa-paper-plane"></i> Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="logo">
+                        <img src="/static/images/Company Logo.jpg" alt="Logo" style="height:40px;">
+                        <span style="color: aliceblue;">IMPRINTS The Design Studio</span>
+                    </div>
+                    <p>Creating sustainable, beautiful spaces that tell your unique story. Experience the future of interior design.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#portfolio">Services</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="#site-visit">Free Site Visit</a></li>
+                        <li><a href="#">Kitchen Design</a></li>
+                        <li><a href="#">Bedroom Interiors</a></li>
+                        <li><a href="#">Wardrobe Solutions</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Warranty</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 IMPRINTS The Design Studio. All rights reserved. | Sustainable Design Leaders</p>
+                <div class="footer-badges">
+                    <span><i class="fas fa-shield-alt"></i> ISO Certified</span>
+                    <span><i class="fas fa-leaf"></i> Carbon Neutral</span>
+                    <span><i class="fas fa-award"></i> 10-Year Warranty</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Success Modal -->
+    <div class="modal" id="successModal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <div class="modal-icon success">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h3 id="modalTitle">Success!</h3>
+            <p id="modalMessage">Your request has been submitted.</p>
+            <button class="btn btn-primary" onclick="closeModal()">Close</button>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
